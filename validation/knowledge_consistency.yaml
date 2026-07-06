@@ -1,0 +1,5 @@
+# Cross-check MANUAL de la knowledge base vs advisories oficiales (NVD/MITRE).
+# El investigador valida cada CVE y asigna un score de consistencia en [0, 1].
+# Sin llamadas de red: se lee este archivo. TODO: validar y ajustar.
+CVE-2023-0264: 1.0
+CVE-2026-33871: 1.0

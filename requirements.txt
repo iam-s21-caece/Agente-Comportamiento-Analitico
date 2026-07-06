@@ -1,0 +1,17 @@
+# Dependencias del agente de análisis de seguridad para Keycloak.
+# Instalar en un venv LOCAL del agente (no global).
+pydantic>=2.6
+pydantic-settings>=2.2
+psutil>=5.9
+requests>=2.31
+PyYAML>=6.0
+openai>=1.30          # cliente compatible usado para la API de DeepSeek
+python-dotenv>=1.0    # carga del .env (usado por pydantic-settings)
+
+# Opcionales
+docker>=7.0           # SDK oficial de Docker (fallback: docker stats por CLI)
+
+# Desarrollo / tests
+pytest>=8.0
+black>=24.0
+isort>=5.13

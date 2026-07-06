@@ -1,0 +1,23 @@
+# Secretos: nunca commitear el .env real.
+.env
+
+# Baseline calculado en runtime.
+config/baseline.json
+
+# Datos persistentes y alertas generadas (volumen del contenedor).
+data/
+alerts/
+
+# Entornos virtuales.
+venv/
+.venv/
+
+# Cache de Python.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Logs.
+*.log

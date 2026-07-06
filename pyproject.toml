@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keycloak-security-agent"
+version = "0.1.0"
+description = "Agente de IA de análisis de seguridad para Keycloak (tesis de grado)"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "psutil>=5.9",
+    "requests>=2.31",
+    "PyYAML>=6.0",
+    "openai>=1.30",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+docker = ["docker>=7.0"]
+dev = ["pytest>=8.0", "black>=24.0", "isort>=5.13"]
+
+[tool.black]
+line-length = 90
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 90
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
