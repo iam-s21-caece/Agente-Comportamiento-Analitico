@@ -1,0 +1,10 @@
+scenario_id: normal-multi-user
+scenario_type: negative
+attacks_present: []
+expected_agent_output:
+  should_alert: false
+  should_identify_cves: []
+  should_link_component: []
+  expected_confidence_range: [0.0, 0.3]
+  acceptable_uncertainty: false
+tolerance: { timing_seconds: 30, confidence_delta: 0.15 }

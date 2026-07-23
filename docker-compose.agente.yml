@@ -1,0 +1,48 @@
+# Compose PROPIO del agente (no modifica el docker-compose.yml de Keycloak).
+# Levantar con:  docker compose -f docker-compose.agente.yml up -d --build
+#
+# Requisitos de visibilidad del agente sobre el host (clave para CVE-2026-33871):
+#   * pid: host         -> ver el proceso JVM de Keycloak y los threads reales.
+#   * network_mode host -> alcanzar https://localhost:8443 y medir CPU del host.
+#   * /var/run/docker.sock -> docker stats (container_metrics) y docker exec (H2).
+services:
+  agente:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: keycloak-security-agent:0.1.0
+    container_name: keycloak-security-agent
+    restart: unless-stopped
+
+    # Comparte el namespace de PIDs del host para ver la JVM de Keycloak.
+    pid: "host"
+    # Red del host: localhost:8443 resuelve a Keycloak y el CPU% es el del host.
+    network_mode: "host"
+
+    # Durante el flood DoS el host satura descriptores; el agente recorre /proc
+    # de todos los procesos por ciclo y debe sobrevivir a esa presión para poder
+    # DETECTAR el ataque (si no, mide degradado y no alerta). Subimos su límite.
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+    env_file:
+      - .env
+
+    environment:
+      # Datos persistentes dentro del contenedor (ver volumen abajo).
+      ALERTS_DIR: /data/alerts
+      BASELINE_PATH: /data/baseline.json
+      TRACES_DIR: /data/traces
+
+    volumes:
+      # Socket de Docker: necesario para docker stats / docker exec (H2).
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Persistencia en una carpeta real de la VPS: las alertas quedan en
+      # ./data/alerts/ y el baseline en ./data/baseline.json del host.
+      # Editá la ruta de la izquierda si querés otro destino en el host.
+      - ./data:/data
+
+    # El agente corre en loop; el modo viene del CMD del Dockerfile (continuous).
+    # Para forzar otro modo: command: ["--mode", "oneshot"]

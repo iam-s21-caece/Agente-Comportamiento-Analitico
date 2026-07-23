@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente de Análisis de Seguridad — Keycloak</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Botón de tema (dark/light) -->
+<button class="theme-toggle" id="themeToggle" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+
+<!-- ==================== PANTALLA DE INGRESO (gate cosmético) ==================== -->
+<!-- NOTA: este ingreso es puramente visual; no provee seguridad real. -->
+<section class="gate" id="gate">
+    <div class="gate-card">
+        <div class="gate-ring">
+            <div class="gate-core">
+                <span class="gate-badge">Security Agent</span>
+                <h1 class="gate-title">Panel de Gestión</h1>
+                <p class="gate-sub">Análisis de seguridad · Keycloak</p>
+                <form id="gateForm" class="gate-form" autocomplete="off">
+                    <input type="text" id="gateUser" class="gate-input" placeholder="Analista" aria-label="Usuario">
+                    <input type="password" id="gatePass" class="gate-input" placeholder="Acceso" aria-label="Acceso">
+                    <button type="submit" class="gate-btn">Ingresar</button>
+                </form>
+                <p class="gate-note">Acceso cosmético · demo de investigación</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DASHBOARD ==================== -->
+<main class="app hidden" id="app">
+    <header class="topbar">
+        <div class="brand">
+            <span class="dot"></span>
+            <div>
+                <h1>Agente de Análisis de Seguridad</h1>
+                <p class="subtitle">Keycloak · CVE-2026-33871 (DoS) · CVE-2023-0264 (OIDC)</p>
+            </div>
+        </div>
+        <div class="status">
+            <span id="liveDot" class="live-dot" title="Estado de la conexión"></span>
+            <span id="lastUpdated" class="last-updated">—</span>
+            <button id="refreshBtn" class="refresh-btn" title="Refrescar ahora">⟳</button>
+        </div>
+    </header>
+
+    <!-- Franja de resumen (informativa, derivada de las propias alertas) -->
+    <section class="stats" id="stats">
+        <div class="stat">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Alertas</span>
+        </div>
+        <div class="stat sev-critical">
+            <span class="stat-value" id="statCritical">0</span>
+            <span class="stat-label">Critical</span>
+        </div>
+        <div class="stat sev-high">
+            <span class="stat-value" id="statHigh">0</span>
+            <span class="stat-label">High</span>
+        </div>
+        <div class="stat sev-medium">
+            <span class="stat-value" id="statMedium">0</span>
+            <span class="stat-label">Medium</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value" id="statCves">0</span>
+            <span class="stat-label">CVEs detectadas</span>
+        </div>
+    </section>
+
+    <!-- Foco central: ALERTAS identificadas -->
+    <section class="alerts-panel">
+        <div class="panel-head">
+            <h2>Alertas identificadas</h2>
+            <span class="panel-hint">más recientes primero</span>
+        </div>
+
+        <!-- Mensaje de error/carga (aquí se exponen errores de lectura) -->
+        <div id="banner" class="banner hidden"></div>
+
+        <!-- Estado vacío -->
+        <div id="emptyState" class="empty hidden">
+            <div class="empty-ring"></div>
+            <p>Sin alertas por ahora — el agente está vigilando.</p>
+        </div>
+
+        <!-- Contenedor de tarjetas de alerta -->
+        <div id="alertsList" class="alerts-list"></div>
+    </section>
+
+    <footer class="foot">
+        Panel de solo lectura · consume <code>data/alerts/alerts.jsonl</code> · no modifica al agente
+    </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
