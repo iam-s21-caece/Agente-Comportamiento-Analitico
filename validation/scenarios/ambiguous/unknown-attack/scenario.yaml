@@ -1,0 +1,5 @@
+scenario_id: unknown-attack
+scenario_type: ambiguous
+description: "Patrón anómalo distinto a las dos CVEs conocidas."
+execute: execute.sh
+post_window_seconds: 90

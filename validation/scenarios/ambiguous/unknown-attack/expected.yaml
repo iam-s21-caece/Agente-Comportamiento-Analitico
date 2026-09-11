@@ -1,0 +1,11 @@
+scenario_id: unknown-attack
+scenario_type: ambiguous
+attacks_present: []
+expected_agent_output:
+  # Correcto = rechazar/incertidumbre, sin encasillar en una CVE conocida.
+  should_alert: false
+  should_identify_cves: []
+  should_link_component: []
+  expected_confidence_range: [0.0, 0.6]
+  acceptable_uncertainty: true
+tolerance: { timing_seconds: 30, confidence_delta: 0.15 }

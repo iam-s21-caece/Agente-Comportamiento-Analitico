@@ -1,0 +1,38 @@
+[
+  {
+    "time": 1782302700000,
+    "type": "LOGIN",
+    "realmId": "poc",
+    "clientId": "client1",
+    "userId": "user-alice",
+    "sessionId": "session-X",
+    "ipAddress": "10.0.0.10"
+  },
+  {
+    "time": 1782302701000,
+    "type": "CODE_TO_TOKEN",
+    "realmId": "poc",
+    "clientId": "client1",
+    "userId": "user-alice",
+    "sessionId": "session-X",
+    "ipAddress": "10.0.0.10"
+  },
+  {
+    "time": 1782302760000,
+    "type": "LOGIN",
+    "realmId": "poc",
+    "clientId": "client1",
+    "userId": "user-mallory",
+    "sessionId": "session-Y",
+    "ipAddress": "10.0.0.20"
+  },
+  {
+    "time": 1782302761000,
+    "type": "CODE_TO_TOKEN",
+    "realmId": "poc",
+    "clientId": "client1",
+    "userId": "user-mallory",
+    "sessionId": "session-X",
+    "ipAddress": "10.0.0.20"
+  }
+]

@@ -1,0 +1,5 @@
+scenario_id: normal-multi-user
+scenario_type: negative
+description: "Actividad legítima: normal-multi-user (el agente NO debe alertar)."
+
+post_window_seconds: 90
